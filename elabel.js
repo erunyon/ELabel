@@ -31,6 +31,7 @@ ELabel.prototype.onAdd = function(map) {
     if(typeof(div.style.opacity)=='string'){div.style.opacity=this.percentOpacity/100;}
   }
   if (this.overlap) {
+		// This is a work in progress
     // var z = GOverlay.getZIndex(this.point.lat());
     // this.div_.style.zIndex = z;
     var z = 1000*(90-this.point.lat());
@@ -50,15 +51,11 @@ ELabel.prototype.copy = function() {
 };
 
 ELabel.prototype.draw = function() {
-  var proj = this.getProjection();
-  var p = proj.fromLatLngToDivPixel(this.point);
-	// log(p);
-  // var div = this.div_;
-  // div.style.left = position.x + 'px';
-  // div.style.top = position.y + 'px';
-  // div.style.display = 'block';
-  this.div_.style.left = (p.x + this.pixelOffset.width) + "px";
-  this.div_.style.top = (p.y +this.pixelOffset.height) + "px";
+  var proj = this.getProjection(),
+  		pos = proj.fromLatLngToDivPixel(this.point);
+
+  this.div_.style.left = (pos.x + this.pixelOffset.width) + "px";
+  this.div_.style.top = (pos.y +this.pixelOffset.height) + "px";
 };
 
 ELabel.prototype.show = function() {

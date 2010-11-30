@@ -4,6 +4,37 @@ The ELabel extension is implemented as a Custom Overlay.
 
 ELabel allows you to place text labels or images or any other HTML elements on the map and have them move with the map, like marker and polyline overlays.
 
+h2. Use
+
+# Create CSS class styles for your labels. It is possible to run ELabels without them, but it's generally easier to use them.
+# Include a copy of the "elabel.js" file.
+# Create some ELabel objects and add them to the map.
+
+h2. Styles
+
+I'm using the following:
+<pre>.label {font-size:9px; text-align:center; color:#222; text-shadow:0 0 5px #fff; font-family:Helvetica, Arial, sans-serif;}</pre>
+
+h2. Include the script
+
+<pre><script src="elabel.js" type="text/javascript"></script></pre>
+
+h2. Create some ELabel objects
+
+<pre>
+  var label = new ELabel(new google.maps.LatLng(41.700346,-86.238899), "My Custom Label", "label");
+  label.setMap(map);
+</pre>
+
+The parameters are:
+
+# a LatLng() specifying the location.
+# a html string to be used as the contents of the ELabel.
+# (optional) a string containing a class name, corresponding to the class style you created in step 1.
+# (optional) a GSize() specifying a pixel offset from the GLatLng(). Without this parameter, the bottom left corner of the ELabel will touch the location specified by the GLatLng
+# (optional) an opacity percentage. If omitted, the ELabel will be 100% opaque.
+# (optional) set this to true to cause ELabels to overlap intelligently. If omitted, the latest one to be addOverlay()ed will be on top. 
+
 h3. Original ELabel Attribution
 
 This Javascript was originally provided by Mike Williams
