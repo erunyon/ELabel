@@ -1,0 +1,27 @@
+h1. ELabel.js for Google Maps API V3
+
+The ELabel extension is implemented as a Custom Overlay.
+
+ELabel allows you to place text labels or images or any other HTML elements on the map and have them move with the map, like marker and polyline overlays.
+
+h3. Original ELabel Attribution
+
+This Javascript was originally provided by Mike Williams
+Community Church Javascript Team
+http://www.bisphamchurch.org.uk/   
+http://econym.org.uk/gmap/
+http://econym.org.uk/gmap/elabel.htm
+
+This work is licenced under a Creative Commons Licence
+http://creativecommons.org/licenses/by/2.0/uk/
+
+Version 0.2      the .copy() parameters were wrong
+version 1.0      added .show() .hide() .setContents() .setPoint() .setOpacity() .overlap
+version 1.1      Works with GMarkerManager in v2.67, v2.68, v2.69, v2.70 and v2.71
+version 1.2      Works with GMarkerManager in v2.72, v2.73, v2.74 and v2.75
+version 1.3      add .isHidden()
+version 1.4      permit .hide and .show to be used before addOverlay()
+version 1.5      fix positioning bug while label is hidden
+version 1.6      added .supportsHide()
+version 1.7      fix .supportsHide()
+version 1.8      remove the old GMarkerManager support due to clashes with v2.143
