@@ -1,3 +1,12 @@
+/*
+ * ELabel.js - v3.0 - 11/29/2010
+ * https://github.com/erunyon/ELabel
+ * 
+ * Copyright (c) 2010 Erik Runyon
+ * Dual licensed under the MIT and GPL licenses.
+ * http://weedygarden.net
+ */
+
 function ELabel(point, html, classname, pixelOffset, percentOpacity, overlap) {
   // Mandatory parameters
   this.point = point;
