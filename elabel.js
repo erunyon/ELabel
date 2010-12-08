@@ -1,5 +1,5 @@
 /*
- * ELabel.js - v3.0 - 11/29/2010
+ * ELabel.js - v3.01 - 12/08/2010
  * https://github.com/erunyon/ELabel
  * 
  * Copyright (c) 2010 Erik Runyon
@@ -7,20 +7,34 @@
  * http://weedygarden.net
  */
 
-function ELabel(point, html, classname, pixelOffset, percentOpacity, overlap) {
+function ELabel(data) {
+	/*
+	 data is an object in the following format:
+	 new ELabel({
+	 	latlng: new google.maps.LatLng(41.700346,-86.238899), 
+	 	label: "Foo", 
+	 	classname: "label", 
+	 	offset: new google.maps.Size(-18, -12), 
+	 	opacity: 100, 
+	 	overlap: true
+	 });
+ */
+
+	var data = data;
+
   // Mandatory parameters
-  this.point = point;
-  this.html = html;
-  
+  this.point = data.latlng;
+  this.html = data.label;
+
   // Optional parameters
-  this.classname = classname || "";
-  this.pixelOffset = pixelOffset || new google.maps.Size(0,0);
-  if (percentOpacity) {
-    if(percentOpacity<0){percentOpacity=0;}
-    if(percentOpacity>100){percentOpacity=100;}
+  this.classname = data.classname || "";
+  this.pixelOffset = data.offset || new google.maps.Size(0,0);
+  if (data.opacity) {
+    if(data.opacity < 0){data.opacity = 0;}
+    if(data.opacity > 100){data.opacity = 100;}
   }        
-  this.percentOpacity = percentOpacity;
-  this.overlap=overlap||false;
+  this.percentOpacity = data.opacity;
+  this.overlap = data.overlap || false;
   this.hidden = false;
 } 
 
@@ -56,7 +70,14 @@ ELabel.prototype.onRemove = function() {
 };
 
 ELabel.prototype.copy = function() {
-  return new ELabel(this.point, this.html, this.classname, this.pixelOffset, this.percentOpacity, this.overlap);
+	return new ELabel({
+			latlng: this.point, 
+			label: this.html, 
+			classname: "label", 
+			offset: new google.maps.Size(-18, -12), 
+			opacity: 100, 
+			overlap: true
+		});
 };
 
 ELabel.prototype.draw = function() {

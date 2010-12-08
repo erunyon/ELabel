@@ -6,6 +6,15 @@ ELabel allows you to place text labels or images or any other HTML elements on t
 
 h2. Use
 
+new ELabel({
+	latlng: new google.maps.LatLng(41.700346,-86.238899), 
+	label: "Foo", 
+	classname: "labelclass", 
+	offset: 0, 
+	opacity: 100, 
+	overlap: true
+});
+
 # Create CSS class styles for your labels. It is possible to run ELabels without them, but it's generally easier to use them.
 # Include a copy of the "elabel.js" file.
 # Create some ELabel objects and add them to the map.
@@ -34,6 +43,11 @@ The parameters are:
 # (optional) a GSize() specifying a pixel offset from the GLatLng(). Without this parameter, the bottom left corner of the ELabel will touch the location specified by the GLatLng
 # (optional) an opacity percentage. If omitted, the ELabel will be 100% opaque.
 # (optional) set this to true to cause ELabels to overlap intelligently. If omitted, the latest one to be addOverlay()ed will be on top. 
+
+h2. Changelog
+
+* 2010-12-08 - Change passed-in parameters an object
+* 2010-11-31 - Re-write for Google Maps v3
 
 h3. Original ELabel Attribution
 
