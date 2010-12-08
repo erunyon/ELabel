@@ -1,5 +1,5 @@
 /*
- * ELabel.js - v3.01 - 12/08/2010
+ * ELabel.js - v3.0.2 - 12/08/2010
  * https://github.com/erunyon/ELabel
  * 
  * Copyright (c) 2010 Erik Runyon
@@ -16,16 +16,17 @@ function ELabel(data) {
 	 	classname: "label", 
 	 	offset: new google.maps.Size(-18, -12), 
 	 	opacity: 100, 
-	 	overlap: true
+	 	overlap: true,
+		clicktarget: false
 	 });
  */
-
+	
 	var data = data;
-
+	
   // Mandatory parameters
   this.point = data.latlng;
   this.html = data.label;
-
+  
   // Optional parameters
   this.classname = data.classname || "";
   this.pixelOffset = data.offset || new google.maps.Size(0,0);
@@ -36,6 +37,7 @@ function ELabel(data) {
   this.percentOpacity = data.opacity;
   this.overlap = data.overlap || false;
   this.hidden = false;
+	this.clicktarget = (data.clicktarget) ? data.clicktarget : false;
 } 
 
 ELabel.prototype = new google.maps.OverlayView;
@@ -47,22 +49,36 @@ ELabel.prototype.onAdd = function(map) {
 	this.getPanes().floatShadow.appendChild(div);
   this.map_ = map;
   this.div_ = div;
-  if (this.percentOpacity) {        
+  if(this.percentOpacity) {        
     if(typeof(div.style.filter)=='string'){div.style.filter='alpha(opacity:'+this.percentOpacity+')';}
     if(typeof(div.style.KHTMLOpacity)=='string'){div.style.KHTMLOpacity=this.percentOpacity/100;}
     if(typeof(div.style.MozOpacity)=='string'){div.style.MozOpacity=this.percentOpacity/100;}
     if(typeof(div.style.opacity)=='string'){div.style.opacity=this.percentOpacity/100;}
   }
-  if (this.overlap) {
+  if(this.overlap) {
 		// This is a work in progress
     // var z = GOverlay.getZIndex(this.point.lat());
     // this.div_.style.zIndex = z;
     var z = 1000*(90-this.point.lat());
     this.div_.style.zIndex = parseInt(z);
   }
-  if (this.hidden) {
+  if(this.hidden) {
     this.hide();
   }
+	if(this.clicktarget) {
+		var target = this.clicktarget;
+		
+		// Can't get this to work, which would be ideal
+		// google.maps.event.addListener(this.div_, 'click', function() {
+		// 	google.maps.event.trigger(target, "click");
+		// });
+		
+		if (typeof jQuery != 'undefined') {
+			jQuery(this.div_).click(function(){
+				google.maps.event.trigger(target, "click");
+			});
+		}
+	}
 };
 
 ELabel.prototype.onRemove = function() {
@@ -76,7 +92,8 @@ ELabel.prototype.copy = function() {
 			classname: "label", 
 			offset: new google.maps.Size(-18, -12), 
 			opacity: 100, 
-			overlap: true
+			overlap: true,
+			clicktarget: false
 		});
 };
 
@@ -117,14 +134,14 @@ ELabel.prototype.setContents = function(html) {
   this.draw();
 };
 
-ELabel.prototype.setPoint = function(point) {
-  this.point = point;
-  if (this.overlap) {
-    var z = GOverlay.getZIndex(this.point.lat());
-    this.div_.style.zIndex = z;
-  }
-  this.draw();
-};
+// ELabel.prototype.setPoint = function(point) {
+//   this.point = point;
+//   if (this.overlap) {
+//     var z = GOverlay.getZIndex(this.point.lat());
+//     this.div_.style.zIndex = z;
+//   }
+//   this.draw();
+// };
 
 ELabel.prototype.setOpacity = function(percentOpacity) {
   if (percentOpacity) {

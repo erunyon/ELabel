@@ -12,7 +12,8 @@ new ELabel({
 	classname: "labelclass", 
 	offset: 0, 
 	opacity: 100, 
-	overlap: true
+	overlap: true,
+	clicktarget: false
 });
 
 # Create CSS class styles for your labels. It is possible to run ELabels without them, but it's generally easier to use them.
@@ -46,8 +47,12 @@ The parameters are:
 
 h2. Changelog
 
-* 2010-12-08 - Change passed-in parameters an object
-* 2010-11-31 - Re-write for Google Maps v3
+* v3.0.2 (2010-12-08)
+** ADD: Add target object (clicktarget) when clicking on the label (checks for and requires jQuery)
+* v3.0.1 (2010-12-08)
+** CHANGE: Change passed-in parameters an object
+* v3.0.0 (2010-11-31)
+** FIX: Re-write for Google Maps v3
 
 h3. Original ELabel Attribution
 
